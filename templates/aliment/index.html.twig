@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Aliments{% endblock %}
+{% block titrePage %}Liste des aliments{% endblock %}
+
+{% block body %}
+<div class="row">
+	
+	{% for aliment in aliments %}
+		<div class="col-12 col-md-6 col-lg-4 col-xl-3">
+			<div class="card border-primary card-mb-3 mx-auto aliment-card">
+				<div class="card-header">
+					<img src="{{ asset('images/aliments/' ~ aliment.image) }}" class="card-img-top">
+				</div>
+
+				<div class="card-body text-center">
+					<h2 class="card-title">{{aliment.nom}}</h2>
+					<hr />	
+					<h4>Prix : {{aliment.prix}}/kg</h4>
+				</div>
+
+				<div class="card-body">
+					<table class="table">
+						<thead class="bg-primary text-white">
+							<tr>
+								<th>Propriété</th>
+								<th>Valeur(100g)</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Calories</td>
+								<td>{{aliment.calorie}}</td>
+							</tr>
+							<tr>
+								<td>Glucides</td>
+								<td>{{aliment.glucide}}</td>
+							</tr>
+							<tr>
+								<td>Lipides</td>
+								<td>{{aliment.lipide}}</td>
+							</tr>
+							<tr>
+								<td>Protéines</td>
+								<td>{{aliment.proteine}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	{% endfor %}
+</div>
+{% endblock %}

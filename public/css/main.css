@@ -1,0 +1,6 @@
+.aliment-card { max-width: 20rem; }
+.aliment-card img { 
+    width: 15rem; 
+    height: 10rem; 
+    object-fit: cover;
+}
