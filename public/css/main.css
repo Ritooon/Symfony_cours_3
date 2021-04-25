@@ -1,6 +1,16 @@
 .aliment-card { max-width: 20rem; }
-.aliment-card img { 
+.aliment-card img, .admin-form-container img { 
     width: 15rem; 
     height: 10rem; 
-    object-fit: cover;
+    object-fit: contain;
 }
+
+.admin-table img { 
+    width: 5rem; 
+    height: 2rem; 
+    object-fit: contain;
+}
+
+
+.admin-table td { vertical-align: middle; }
+.admin-table form { display: inline-block; }

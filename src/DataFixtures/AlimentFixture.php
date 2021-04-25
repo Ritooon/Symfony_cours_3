@@ -28,7 +28,7 @@ class AlimentFixture extends Fixture
             ->setLipide(9.1)
             ->setProteine(10.1)
             ->setPrix(2.99)
-            ->setImage('patate.png')
+            ->setImage('patate.jpg')
         ;
         $manager->persist($l2);
 

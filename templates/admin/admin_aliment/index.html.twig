@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration{% endblock %}
+{% block titrePage %}Administration des aliments{% endblock %}
+
+{% block body %}
+
+{% for message in app.flashes('success') %}
+    <div class="alert alert-success">
+        {{message}}
+    </div>
+{% endfor %}
+
+<div class="row">
+	<div class="col-12">
+		<a class="btn btn-success p-2 m-2" href="{{ path('ajout_aliment') }}">Ajouter</a>
+	</div>
+</div>
+
+<div class="row">
+    <div class="col-12 p-4 m-2">
+        <table class="table admin-table">
+            <thead class="bg-primary text-white">
+                <tr>
+                    <th>Image</th>
+                    <th>Nom</th>
+                    <th>Prix</th>
+                    <th>Calories</th>
+                    <th>Protéines</th>
+                    <th>Glucides</th>
+                    <th>Lipides</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for aliment in aliments %}
+                    <tr>
+                        <td><img src="{{asset('images/aliments/' ~  aliment.image)}}" /></td>
+                        <td>{{aliment.nom}}</td>
+                        <td>{{aliment.prix}}</td>
+                        <td>{{aliment.calorie}}</td>
+                        <td>{{aliment.proteine}}</td>
+                        <td>{{aliment.glucide}}</td>
+                        <td>{{aliment.lipide}}</td>
+                        <td>
+                            <a class="btn btn-primary p-2 m-2" href="{{ path('modification_aliment', {'id': aliment.id}) }}">Modifier</a>
+
+                            <form method="POST" action="{{path('suppression_aliment', {'id': aliment.id})}}" onsubmit="return confirm('Confirmer la suppression ?');">
+                                <input type="hidden" name="_method" value="DEL" />
+                                <input type="hidden" name="_token" value="{{csrf_token('DEL' ~ aliment.id)}}" />
+                                <input type="submit" class="btn btn-danger p-2 m-2" value="Supprimer"/>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+	
+</div>
+{% endblock %}

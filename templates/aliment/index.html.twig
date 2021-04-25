@@ -1,11 +1,32 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Aliments{% endblock %}
-{% block titrePage %}Liste des aliments{% endblock %}
+{% block titrePage %}
+	Liste des aliments
+
+	{% if isCalorie %}
+		Avec moins de {{nb}} calories
+	{% elseif isGlucide %}
+		Avec moins de {{nb}} glucides
+	{% endif %}
+
+{% endblock %}
 
 {% block body %}
+
 <div class="row">
-	
+	<div class="col-12">
+		<a class="btn btn-primary p-2 m-2" href="{{ path('aliments') }}">Tous</a>
+		<a class="btn btn-primary p-2 m-2" href="{{ path('alimentsParCalorie', {'calorie': 15}) }}">
+			< 15 calories
+		</a>
+		<a class="btn btn-primary p-2 m-2" href="{{ path('alimentsParGlucide', {'glucide': 5}) }}">
+			< 5 glucides
+		</a>
+	</div>
+</div>
+
+<div class="row">
 	{% for aliment in aliments %}
 		<div class="col-12 col-md-6 col-lg-4 col-xl-3">
 			<div class="card border-primary card-mb-3 mx-auto aliment-card">

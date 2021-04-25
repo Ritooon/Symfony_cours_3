@@ -47,4 +47,15 @@ class AlimentRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function afficherAlimentParPropriete($propriete, $signe, $calorie)
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.'.$propriete.' '.$signe.' :val')
+            ->setParameter('val', $calorie)
+            ->orderBy('a.nom', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {% if isModification %}
+        Modification
+    {% else %}
+        Ajout
+    {% endif %}    
+{% endblock %}
+{% block titrePage %}
+    {% if isModification %}
+        Modification de l'aliment : {{aliment.nom}}
+    {% else %}
+        Ajout d'un aliment
+    {% endif %}    
+{% endblock %}
+
+{% block body %}
+    <div class="row admin-form-container">
+        <div class="col-12 p-2 m-2">
+            {{form_start(form)}}
+                <div class="row">
+                    <div class="col-6">
+                        <div class="row p-2 m-2">
+                            <div class="col-6">
+                                {% if aliment.image == '' %}
+                                    <img src="{{ asset('images/no_image.png') }}" />
+                                {% else %}
+                                    <img src="{{ asset('images/aliments/' ~ aliment.image) }}" />
+                                {% endif %}
+                                
+                            </div>
+                            <div class="col-6">
+                                {{form_row(form.image)}}
+                            </div>
+                        </div>
+
+
+                        <div class="p-2 m-2">{{form_row(form.nom, {'label' : 'Nom de l\'aliment'})}}</div>
+
+                    </div>
+
+                    <div class="col-6 pr-5">
+                        {{form_widget(form)}}
+                    </div>
+                </div>
+                
+                <div class="text-center">
+                    <input type="submit" class="btn btn-success" value="Enregistrer">    
+                </div>
+            {{form_end(form)}}
+        </div>
+    </div>
+{% endblock %}
