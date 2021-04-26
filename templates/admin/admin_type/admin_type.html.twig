@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration{% endblock %}
+{% block titrePage %}Administration des types{% endblock %}
+
+{% block body %}
+
+{% for message in app.flashes('success') %}
+    <div class="alert alert-success">
+        {{message}}
+    </div>
+{% endfor %}
+
+<div class="row">
+	<div class="col-12">
+		<a class="btn btn-success p-2 m-2" href="{{ path('ajout_type') }}">Ajouter</a>
+	</div>
+</div>
+
+<div class="row">
+    <div class="col-12 p-4 m-2">
+        <table class="table admin-table">
+            <thead class="bg-primary text-white">
+                <tr>
+                    <th>Image</th>
+                    <th>Libellé</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for type in types %}
+                    <tr>
+                        <td><img src="{{asset('images/types/' ~  type.image)}}" /></td>
+                        <td>{{type.libelle}}</td>
+                        <td class="text-center">
+                            <a class="btn btn-primary p-2 m-2" href="{{ path('modif_type', {'id' : type.id}) }}">Modifier</a>
+
+                            <form method="POST" action="{{ path('supprimer_type', {'id' : type.id}) }}" onsubmit="return confirm('Confirmer la suppression ?');">
+                                <input type="hidden" name="_method" value="DEL" />
+                                <input type="hidden" name="_token" value="{{csrf_token('DEL' ~ type.id)}}" />
+                                <input type="submit" class="btn btn-danger p-2 m-2" value="Supprimer"/>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+	
+</div>
+{% endblock %}

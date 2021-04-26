@@ -9,9 +9,9 @@
 {% endblock %}
 {% block titrePage %}
     {% if isModification %}
-        Modification de l'aliment : {{aliment.nom}}
+        Modification du type : {{type.libelle}}
     {% else %}
-        Ajout d'un aliment
+        Ajout d'un type
     {% endif %}    
 {% endblock %}
 
@@ -23,26 +23,20 @@
                     <div class="col-6">
                         <div class="row p-2 m-2">
                             <div class="col-6">
-                                {% if aliment.image == '' %}
+                                {% if type.image == '' %}
                                     <img src="{{ asset('images/no_image.png') }}" />
                                 {% else %}
-                                    <img src="{{ asset('images/aliments/' ~ aliment.image) }}" />
+                                    <img src="{{ asset('images/types/' ~ type.image) }}" />
                                 {% endif %}
-                                
                             </div>
                             <div class="col-6">
                                 {{form_row(form.imageFile)}}
                             </div>
-                            
-                        </div>
 
-
-                        <div class="p-2 m-2">{{form_row(form.nom, {'label' : 'Nom de l\'aliment'})}}</div>
-                        <div class="p-2 m-2">{{form_row(form.type)}}</div>
-                    </div>
-
-                    <div class="col-6 pr-5">
-                        {{form_widget(form)}}
+                            <div class="col-12">
+                                {{form_row(form.libelle, {'label' : 'Libellé du type'})}}
+                            </div>
+                        </div>                        
                     </div>
                 </div>
                 
